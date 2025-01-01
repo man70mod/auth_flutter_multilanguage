@@ -1,3 +1,4 @@
+import 'package:auth_flutter/helper/constance.dart';
 import 'package:flutter/material.dart';
 
 class AppBarCustom extends StatelessWidget implements PreferredSizeWidget
@@ -11,9 +12,11 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget
   @override
   Widget build(BuildContext context) {
     return  AppBar(
-      title: Text(title),
+      title: Text(title,
+      style: TextStyle(fontSize: 18,color: Colors.white),
+      ),
       centerTitle:centerTitle,
-       backgroundColor: Colors.green,
+       backgroundColor: ConstColor.backgroundAppBar,
 
 
     );

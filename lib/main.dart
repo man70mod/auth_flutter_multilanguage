@@ -1,6 +1,11 @@
+import 'package:auth_flutter/bindings/bindings.dart';
+import 'package:auth_flutter/helper/constance.dart';
+import 'package:auth_flutter/translate.dart';
 import 'package:auth_flutter/views/login/login.dart';
+import 'package:auth_flutter/views/login/login_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const App());
@@ -9,38 +14,40 @@ void main() {
 class App extends StatelessWidget {
   const App({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: [
+        Locale('fa', ''),
+        Locale('En', ''),
+        Locale('ar', ''),
+      ],
+      translations: Translate(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      
-      textDirection: TextDirection.rtl,
+          scaffoldBackgroundColor: const Color.fromARGB(255, 250, 250, 250),
+          inputDecorationTheme: InputDecorationTheme(
+              border: const OutlineInputBorder(),
+              contentPadding: EdgeInsets.all(10),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: ConstColor.backgroundAppBar))),
+          // This is the theme of your application.
+          textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.black),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                  //   backgroundColor: ConstColor.backgroundAppBar
+                  ))),
+      // textDirection: TextDirection.rtl,
+      initialBinding: MyBindings(),
       getPages: [
-        GetPage(name: '/login', page: ()=>const Home())
+        GetPage(name: '/login', page: () => const Login()),
+        GetPage(name: '/login/otp', page: () => LoginOtp())
       ],
       initialRoute: '/login',
     );
   }
 }
-
